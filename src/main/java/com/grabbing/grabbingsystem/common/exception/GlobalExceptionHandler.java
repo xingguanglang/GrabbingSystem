@@ -55,7 +55,13 @@ public class GlobalExceptionHandler {
     public ApiResponse<Void> handleBizException(BizException e) {
         return ApiResponse.fail(e.getCode(), e.getMessage());
     }
-
+    @ExceptionHandler(BusinessException.class)
+    public ApiResponse<?> handleBusinessException(BusinessException e) {
+        return ApiResponse.fail(
+                e.getErrorCode().getCode(),
+                e.getErrorCode().getMsg()
+        );
+    }
     /**
      * 4）兜底：任何没想到的异常都在这里接住
      *
@@ -63,6 +69,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ApiResponse<Void> handleUnknown(Exception e) {
+        e.printStackTrace();
         return ApiResponse.fail(50000, "系统异常");
     }
 }
