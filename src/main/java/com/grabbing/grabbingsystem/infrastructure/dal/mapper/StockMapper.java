@@ -14,4 +14,6 @@ public interface StockMapper extends BaseMapper<StockDO> {
         """)
     int deductStock(@Param("skuId") Long skuId,
                     @Param("count") Integer count);
+    @Update("UPDATE stock SET stock_count = stock_count + #{delta} WHERE sku_id = #{skuId}")
+    int addStock(@Param("skuId") Long skuId, @Param("delta") Integer delta);
 }

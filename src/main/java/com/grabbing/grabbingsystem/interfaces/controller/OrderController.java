@@ -18,7 +18,11 @@ public class OrderController {
         String orderNo = orderService.createOrder(req.getUserId(), req.getSkuId(), req.getCount());
         return ApiResponse.ok(new CreateOrderResponse(orderNo));
     }
-
+    @PostMapping("/cancel")
+    public ApiResponse<Void> cancel(@RequestParam String orderNo) {
+        orderService.cancelOrder(orderNo);
+        return ApiResponse.ok(null);
+    }
     @Data
     public static class CreateOrderRequest {
         private Long userId;

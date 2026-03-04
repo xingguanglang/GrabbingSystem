@@ -20,10 +20,11 @@ public class BizException extends RuntimeException {
         super(message);
         this.code = code;
     }
-
-    public BizException(ErrorCode errorCode, int code) {
-        this.code = code;
+    public BizException(String message) {
+        super(message);
+        this.code = 10000;
     }
+
     public BizException(ErrorCode errorCode) {
         super(errorCode.getMsg());
         this.code = errorCode.getCode();

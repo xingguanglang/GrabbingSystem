@@ -1,5 +1,6 @@
 package com.grabbing.grabbingsystem.common.health;
 
+import com.grabbing.grabbingsystem.infrastructure.dal.mapper.HealthMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;

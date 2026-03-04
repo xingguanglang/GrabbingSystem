@@ -1,4 +1,4 @@
-package com.grabbing.grabbingsystem.common.health;
+package com.grabbing.grabbingsystem.infrastructure.dal.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
