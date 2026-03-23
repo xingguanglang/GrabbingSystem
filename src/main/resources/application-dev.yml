@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    # MySQL 连接地址（最重要）
+    # 格式：jdbc:mysql://<host>:<port>/<db>?参数...
+    url: jdbc:mysql://localhost:3306/grabbingsystem_dev?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+
+    # MySQL 用户名（按你自己机器的改）
+    username: kai
+
+    # MySQL 密码（按你自己机器的改）
+    password:
+
+    # MySQL 驱动类（Boot 4 + MySQL 8 推荐用这个）
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    redis:
+      # Redis 地址（本机一般就是 localhost）
+      host: localhost
+      port: 6379
+
+# 让 MyBatis / MyBatis-Plus 在控制台打印 SQL（新手调试非常重要）
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Swagger（springdoc）的路径配置（可选，不配也能访问默认 /swagger-ui/index.html）
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
