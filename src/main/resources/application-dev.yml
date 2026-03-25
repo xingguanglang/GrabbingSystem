@@ -28,3 +28,4 @@ mybatis-plus:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+    tryItOutEnabled: True

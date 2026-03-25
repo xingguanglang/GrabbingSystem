@@ -17,7 +17,10 @@ public class OrderDO {
 
     @TableField("user_id")
     private Long userId;
-
+    @TableField("order_type")
+    private String orderType;
+    @TableField("promo_id")
+    private Long promoId;
     /** 总金额：分 */
     @TableField("total_amount")
     private Long totalAmount;
@@ -31,4 +34,5 @@ public class OrderDO {
 
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
 }

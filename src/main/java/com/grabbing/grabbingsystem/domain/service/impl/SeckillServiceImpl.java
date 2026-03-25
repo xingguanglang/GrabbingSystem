@@ -64,7 +64,7 @@ public class SeckillServiceImpl implements SeckillService {
 
         // 2) Redis 预扣成功 => 复用你现有的 MySQL 建单逻辑
         try {
-            return orderService.createOrder(userId, skuId, 1);
+            return orderService.createOrder(userId, skuId,1,"SECKILL",promoId);
         } catch (Exception e) {
             // 3) MySQL 落库失败 => 回滚 Redis（把库存+1，删除 buyKey）
             seckillRedisExecutor.rollback(stockKey, buyKey);
