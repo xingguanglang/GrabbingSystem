@@ -28,4 +28,10 @@ mybatis-plus:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-    tryItOutEnabled: True
+    try-it-out-enabled: true
+
+pressure-test:
+  auto-refill:
+    enabled: true
+    promo-id: 1
+    stock: 100000

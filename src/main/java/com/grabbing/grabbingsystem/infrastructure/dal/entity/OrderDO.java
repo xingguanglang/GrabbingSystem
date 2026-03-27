@@ -21,7 +21,6 @@ public class OrderDO {
     private String orderType;
     @TableField("promo_id")
     private Long promoId;
-    /** 总金额：分 */
     @TableField("total_amount")
     private Long totalAmount;
 
