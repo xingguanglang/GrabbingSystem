@@ -21,13 +21,13 @@ public class OrderTimeoutJob {
     private final OrderMapper orderMapper;
     private final OrderService orderService;
 
-    @Value("${order.timeout-minutes:15}")
-    private long timeoutMinutes;
+    @Value("${order.timeout-second:150}")
+    private long timeout;
 
     // 默认每分钟扫一次，你也可以换成读取配置 cron（先简单固定也行）
     @Scheduled(cron = "${order.timeout-scan-cron:0 * * * * ?}")
     public void scanTimeoutOrders() {
-        LocalDateTime deadline = LocalDateTime.now().minusMinutes(timeoutMinutes);
+        LocalDateTime deadline = LocalDateTime.now().minusSeconds(timeout);
 
         // 只扫 INIT 且 create_time < deadline 的订单，限制数量防止一次扫太多
         List<OrderDO> timeoutOrders = orderMapper.selectList(

@@ -2,5 +2,5 @@ spring:
   profiles:
     active: dev
 order:
-  timeout-minutes: 15
-  timeout-scan-cron: "0 * * * * ?"
+  timeout-second: 150
+  timeout-scan-cron: "0/15 * * * * ?"

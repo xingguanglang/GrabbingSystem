@@ -82,23 +82,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public String createOrder(Long userId, Long skuId, Integer count) {
-
-        // 1) 查 sku
+        return createOrder(userId, skuId, count, "NORMAL", null);
+    }
+    public String createOrder(Long userId, Long skuId, Integer count, String orderType, Long promoId){
         SkuDO sku = skuMapper.selectById(skuId);
         if (sku == null) {
             throw new BusinessException(ErrorCode.SKU_NOT_FOUND);
         }
-        if (!"ON".equals(sku.getStatus())) {
+        if (!"ON".equals(sku.getStatus())){
             throw new BusinessException(ErrorCode.SKU_OFFLINE);
         }
-
-        // 2) 扣库存（防超卖核心）
         int affected = stockMapper.deductStock(skuId, count);
         if (affected == 0) {
             throw new BusinessException(ErrorCode.STOCK_NOT_ENOUGH);
         }
-
-        // 3) 建订单
         String orderNo = UUID.randomUUID().toString();
         long totalAmount = sku.getPrice() * count;
 
@@ -107,6 +104,11 @@ public class OrderServiceImpl implements OrderService {
         order.setUserId(userId);
         order.setTotalAmount(totalAmount);
         order.setStatus("INIT");
+
+        // ⭐ 新增：标记订单类型和活动ID
+        order.setOrderType(orderType);
+        order.setPromoId(promoId);
+
         LocalDateTime now = LocalDateTime.now();
         order.setCreateTime(now);
         order.setUpdateTime(now);
@@ -120,7 +122,6 @@ public class OrderServiceImpl implements OrderService {
         item.setCount(count);
         item.setCreateTime(now);
         orderItemMapper.insert(item);
-
         return orderNo;
     }
     @Transactional
